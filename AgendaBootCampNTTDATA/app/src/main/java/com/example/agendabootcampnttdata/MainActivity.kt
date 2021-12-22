@@ -12,25 +12,17 @@ import org.w3c.dom.Text
 
 class MainActivity : AppCompatActivity() {
 
-    var btnSetEvent = findViewById<MaterialButton>(R.id.btnSetEvent)
-    var edtName = findViewById<MaterialTextView>(R.id.edtName)
-    var edtLocation = findViewById<MaterialTextView>(R.id.edtLocation)
-    var edtDescription = findViewById<MaterialTextView>(R.id.edtDescription)
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        addEvent()
 
-    }
-
-    private fun addEvent() {
+        val btnSetEvent = findViewById<MaterialButton>(R.id.btnSetEvent)
         btnSetEvent.setOnClickListener {
 
             val intent = Intent(Intent.ACTION_INSERT)
                 .setData(CONTENT_URI)
-                .putExtra(TITLE,"Luiz Gonzaga")
+                .putExtra(TITLE, "Luiz Gonzaga")
                 .putExtra(EVENT_LOCATION, "ONLINE")
                 .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, System.currentTimeMillis())
                 .putExtra(
@@ -40,7 +32,6 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
-
 }
 
 
