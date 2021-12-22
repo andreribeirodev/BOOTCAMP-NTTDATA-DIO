@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">AgendaBootCampNTTDATA</string>
+    <string name="event_name">Nome</string>
+    <string name="event_location">Local</string>
+    <string name="add_event">Adicionar Evento</string>
+    <string name="event_description">Descrição</string>
 </resources>
