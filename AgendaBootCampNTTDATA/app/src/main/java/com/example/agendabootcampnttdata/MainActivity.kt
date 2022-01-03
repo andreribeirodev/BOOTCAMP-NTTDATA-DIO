@@ -6,30 +6,55 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.CalendarContract
 import android.provider.CalendarContract.Events.*
+import android.widget.Button
+import android.widget.EditText
+import android.widget.Toast
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textview.MaterialTextView
 import org.w3c.dom.Text
 
 class MainActivity : AppCompatActivity() {
 
+
+    private val edtName: EditText by lazy {
+        findViewById(R.id.edtName)
+    }
+
+    private val edtLocation: EditText by lazy {
+        findViewById(R.id.edtLocation)
+    }
+
+    private val edtDescription: EditText by lazy {
+        findViewById(R.id.edtDescription)
+    }
+
+    private val btnSetEvent: MaterialButton by lazy {
+        findViewById(R.id.btnSetEvent)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
-        val btnSetEvent = findViewById<MaterialButton>(R.id.btnSetEvent)
         btnSetEvent.setOnClickListener {
 
-            val intent = Intent(Intent.ACTION_INSERT)
-                .setData(CONTENT_URI)
-                .putExtra(TITLE, "Luiz Gonzaga")
-                .putExtra(EVENT_LOCATION, "ONLINE")
-                .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, System.currentTimeMillis())
-                .putExtra(
-                    CalendarContract.EXTRA_EVENT_END_TIME,
-                    System.currentTimeMillis() + (60 * 60 * 1000)
-                )
-            startActivity(intent)
+            if (!(edtName.text.isEmpty() && edtLocation.text.isEmpty())) {
+
+                val intent = Intent(Intent.ACTION_INSERT)
+                    .setData(CONTENT_URI)
+                    .putExtra(TITLE, edtName.text.toString())
+                    .putExtra(EVENT_LOCATION, edtLocation.text.toString())
+                    .putExtra(DESCRIPTION, edtDescription.text.toString())
+                    .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, System.currentTimeMillis())
+                    .putExtra(
+                        CalendarContract.EXTRA_EVENT_END_TIME,
+                        System.currentTimeMillis() + (60 * 60 * 1000)
+                    )
+                startActivity(intent)
+
+            } else {
+                Toast.makeText(this, "Preencha os campos acima", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 }
