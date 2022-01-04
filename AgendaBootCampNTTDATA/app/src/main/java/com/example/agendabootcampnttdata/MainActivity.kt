@@ -5,29 +5,29 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.CalendarContract
+import android.provider.CalendarContract.Attendees
 import android.provider.CalendarContract.Events.*
+import android.provider.ContactsContract
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import com.google.android.material.textview.MaterialTextView
 import org.w3c.dom.Text
 
 class MainActivity : AppCompatActivity() {
 
-
-    private val edtName: EditText by lazy {
+    private val edtName: TextInputEditText by lazy {
         findViewById(R.id.edtName)
     }
-
-    private val edtLocation: EditText by lazy {
+    private val edtLocation: TextInputEditText by lazy {
         findViewById(R.id.edtLocation)
     }
-
-    private val edtDescription: EditText by lazy {
+    private val edtDescription: TextInputEditText by lazy {
         findViewById(R.id.edtDescription)
     }
-
     private val btnSetEvent: MaterialButton by lazy {
         findViewById(R.id.btnSetEvent)
     }
@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
 
         btnSetEvent.setOnClickListener {
 
-            if (!(edtName.text.isEmpty() && edtLocation.text.isEmpty())) {
+            if (!(edtName.text.isNullOrEmpty() && edtLocation.text.isNullOrEmpty() && edtDescription.text.isNullOrEmpty())) {
 
                 val intent = Intent(Intent.ACTION_INSERT)
                     .setData(CONTENT_URI)
